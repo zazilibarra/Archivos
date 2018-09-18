@@ -79,11 +79,12 @@
             this.Dir_Atributo,
             this.Dir_Datos,
             this.Dir_Sig_Entidad});
-            this.gridEntidad.Location = new System.Drawing.Point(12, 127);
+            this.gridEntidad.Location = new System.Drawing.Point(9, 103);
+            this.gridEntidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridEntidad.Name = "gridEntidad";
             this.gridEntidad.ReadOnly = true;
             this.gridEntidad.RowTemplate.Height = 24;
-            this.gridEntidad.Size = new System.Drawing.Size(543, 527);
+            this.gridEntidad.Size = new System.Drawing.Size(407, 428);
             this.gridEntidad.TabIndex = 0;
             this.gridEntidad.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridEntidad_CellClick);
             // 
@@ -130,11 +131,12 @@
             this.Tipo_indice,
             this.Dir_indice,
             this.Dir_Sig_Atr});
-            this.gridAtributos.Location = new System.Drawing.Point(561, 127);
+            this.gridAtributos.Location = new System.Drawing.Point(421, 103);
+            this.gridAtributos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridAtributos.Name = "gridAtributos";
             this.gridAtributos.ReadOnly = true;
             this.gridAtributos.RowTemplate.Height = 24;
-            this.gridAtributos.Size = new System.Drawing.Size(743, 527);
+            this.gridAtributos.Size = new System.Drawing.Size(557, 428);
             this.gridAtributos.TabIndex = 1;
             // 
             // Nombre_Attr
@@ -187,7 +189,8 @@
             this.verToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1311, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(983, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -199,34 +202,34 @@
             this.guardarToolStripMenuItem,
             this.salirToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
             // nuevoToolStripMenuItem
             // 
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.nuevoToolStripMenuItem.Text = "Nuevo";
             this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.nuevoToolStripMenuItem_Click);
             // 
             // abrirToolStripMenuItem
             // 
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.abrirToolStripMenuItem.Text = "Abrir";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
             // 
             // guardarToolStripMenuItem
             // 
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.guardarToolStripMenuItem.Text = "Guardar";
             this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             // 
             // verToolStripMenuItem
@@ -234,7 +237,7 @@
             this.verToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cabeceraToolStripMenuItem});
             this.verToolStripMenuItem.Name = "verToolStripMenuItem";
-            this.verToolStripMenuItem.Size = new System.Drawing.Size(42, 24);
+            this.verToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
             this.verToolStripMenuItem.Text = "Ver";
             // 
             // cabeceraToolStripMenuItem
@@ -242,27 +245,29 @@
             this.cabeceraToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.txtCabecera});
             this.cabeceraToolStripMenuItem.Name = "cabeceraToolStripMenuItem";
-            this.cabeceraToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.cabeceraToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.cabeceraToolStripMenuItem.Text = "Cabecera";
             // 
             // txtCabecera
             // 
             this.txtCabecera.Name = "txtCabecera";
             this.txtCabecera.ReadOnly = true;
-            this.txtCabecera.Size = new System.Drawing.Size(100, 27);
+            this.txtCabecera.Size = new System.Drawing.Size(100, 23);
             // 
             // txtEntidad
             // 
-            this.txtEntidad.Location = new System.Drawing.Point(6, 21);
+            this.txtEntidad.Location = new System.Drawing.Point(4, 17);
+            this.txtEntidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtEntidad.Name = "txtEntidad";
-            this.txtEntidad.Size = new System.Drawing.Size(288, 22);
+            this.txtEntidad.Size = new System.Drawing.Size(217, 20);
             this.txtEntidad.TabIndex = 3;
             // 
             // btnCrearEntidad
             // 
-            this.btnCrearEntidad.Location = new System.Drawing.Point(300, 21);
+            this.btnCrearEntidad.Location = new System.Drawing.Point(225, 17);
+            this.btnCrearEntidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCrearEntidad.Name = "btnCrearEntidad";
-            this.btnCrearEntidad.Size = new System.Drawing.Size(75, 23);
+            this.btnCrearEntidad.Size = new System.Drawing.Size(56, 19);
             this.btnCrearEntidad.TabIndex = 4;
             this.btnCrearEntidad.Text = "Crear";
             this.btnCrearEntidad.UseVisualStyleBackColor = true;
@@ -270,12 +275,14 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(381, 21);
+            this.button2.Location = new System.Drawing.Point(286, 17);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(56, 19);
             this.button2.TabIndex = 5;
             this.button2.Text = "Modificar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // groupBox1
             // 
@@ -283,57 +290,68 @@
             this.groupBox1.Controls.Add(this.txtEntidad);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.btnCrearEntidad);
-            this.groupBox1.Location = new System.Drawing.Point(12, 49);
+            this.groupBox1.Location = new System.Drawing.Point(9, 40);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(543, 62);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(407, 50);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Entidad";
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(462, 21);
+            this.button5.Location = new System.Drawing.Point(346, 17);
+            this.button5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.Size = new System.Drawing.Size(56, 19);
             this.button5.TabIndex = 6;
             this.button5.Text = "Eliminar";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button6);
             this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Location = new System.Drawing.Point(561, 49);
+            this.groupBox2.Location = new System.Drawing.Point(421, 40);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(505, 62);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(379, 50);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Atributo";
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(417, 21);
+            this.button6.Location = new System.Drawing.Point(313, 17);
+            this.button6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.Size = new System.Drawing.Size(56, 19);
             this.button6.TabIndex = 7;
             this.button6.Text = "Eliminar";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(336, 21);
+            this.button3.Location = new System.Drawing.Point(252, 17);
+            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(56, 19);
             this.button3.TabIndex = 5;
             this.button3.Text = "Modificar";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(255, 21);
+            this.button4.Location = new System.Drawing.Point(191, 17);
+            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(56, 19);
             this.button4.TabIndex = 4;
             this.button4.Text = "Crear";
             this.button4.UseVisualStyleBackColor = true;
@@ -341,9 +359,9 @@
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1311, 666);
+            this.ClientSize = new System.Drawing.Size(983, 541);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gridAtributos);
@@ -351,6 +369,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

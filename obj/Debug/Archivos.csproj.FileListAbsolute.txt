@@ -9,3 +9,14 @@ C:\Users\Mildred Sifuentes\Downloads\Archivos\Proyecto\Archivos\Archivos\bin\Deb
 C:\Users\Mildred Sifuentes\Downloads\Archivos\Proyecto\Archivos\Archivos\bin\Debug\Archivos.pdb
 C:\Users\Mildred Sifuentes\Downloads\Archivos\Proyecto\Archivos\Archivos\obj\Debug\Archivos.exe
 C:\Users\Mildred Sifuentes\Downloads\Archivos\Proyecto\Archivos\Archivos\obj\Debug\Archivos.pdb
+C:\Users\a_k_n\Documents\Programas\Visual\Archivos\bin\Debug\Archivos.exe.config
+C:\Users\a_k_n\Documents\Programas\Visual\Archivos\bin\Debug\Archivos.exe
+C:\Users\a_k_n\Documents\Programas\Visual\Archivos\bin\Debug\Archivos.pdb
+C:\Users\a_k_n\Documents\Programas\Visual\Archivos\obj\Debug\Archivos.csprojResolveAssemblyReference.cache
+C:\Users\a_k_n\Documents\Programas\Visual\Archivos\obj\Debug\Archivos.Nuevo_Atributo.resources
+C:\Users\a_k_n\Documents\Programas\Visual\Archivos\obj\Debug\Archivos.Main.resources
+C:\Users\a_k_n\Documents\Programas\Visual\Archivos\obj\Debug\Archivos.Properties.Resources.resources
+C:\Users\a_k_n\Documents\Programas\Visual\Archivos\obj\Debug\Archivos.csproj.GenerateResource.Cache
+C:\Users\a_k_n\Documents\Programas\Visual\Archivos\obj\Debug\Archivos.csproj.CoreCompileInputs.cache
+C:\Users\a_k_n\Documents\Programas\Visual\Archivos\obj\Debug\Archivos.exe
+C:\Users\a_k_n\Documents\Programas\Visual\Archivos\obj\Debug\Archivos.pdb

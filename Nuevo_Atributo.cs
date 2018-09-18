@@ -15,9 +15,11 @@ namespace Archivos
         Archivo Archivo;
         public Atributo atributo;
         public Entidad destino;
+        public bool modif = false;
 
-        public Nuevo_Atributo(Archivo a)
+        public Nuevo_Atributo(Archivo a,bool modify)
         {
+            modif = modify;
             Archivo = a;
             InitializeComponent();
             LlenarCbo();
@@ -29,12 +31,24 @@ namespace Archivos
             {
                 cboEntidades.Items.Add(ent.Nombre);
             }
+            if(modif)
+            {
+                cboEntidades.Enabled = false;
+                txtAtributo.Enabled = true;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            atributo = new Atributo(txtAtributo.Text, cboTipo.SelectedItem.ToString()[0], Int32.Parse(txtLong.Text), Int32.Parse(cboTipoIindice.SelectedItem.ToString()), 0);
-            destino = Archivo.BuscarEntidad(cboEntidades.SelectedItem.ToString());
+            if (!modif)
+            {
+                atributo = new Atributo(txtAtributo.Text, cboTipo.SelectedItem.ToString()[0], Int32.Parse(txtLong.Text), Int32.Parse(cboTipoIindice.SelectedItem.ToString()), 0);
+                destino = Archivo.BuscarEntidad(cboEntidades.SelectedItem.ToString());
+            }
+            else
+            {
+                atributo = new Atributo(txtAtributo.Text, 'x', 1, Int32.Parse(cboTipoIindice.SelectedItem.ToString()), 0);
+            }
             this.DialogResult = DialogResult.OK;
             this.Close();
 
@@ -42,9 +56,13 @@ namespace Archivos
 
         private void txtAtributo_TextChanged(object sender, EventArgs e)
         {
-            if (txtAtributo.Text != "")
+            if (txtAtributo.Text != "" && !modif)
             {
                 cboTipo.Enabled = true;
+            }
+            if(modif)
+            {
+                cboTipoIindice.Enabled = true;
             }
         }
 
@@ -70,17 +88,12 @@ namespace Archivos
 
         private void cboEntidades_SelectedValueChanged(object sender, EventArgs e)
         {
-            txtAtributo.Enabled = true;
+                txtAtributo.Enabled = true;
         }
 
         private void cboTipoIindice_SelectedValueChanged(object sender, EventArgs e)
         {
             button1.Enabled = true;
-        }
-
-        private void cboTipo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

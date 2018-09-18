@@ -32,11 +32,29 @@ namespace Archivos
             this.sNombre = n;
         }
 
+        public void GuardarEnt(string directorio)
+        {
+            //Formato de Serializacion/Deserializacion
+            var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            var fi = new System.IO.FileInfo(@directorio + sNombre + ".dat");
+            //Crea el archivo
+            using (var binaryFile = fi.Create())
+            {
+                //Serializa el diccionario con el formato binario
+                binaryFormatter.Serialize(binaryFile, 1);
+                binaryFile.Flush();
+            }
+        }
+
         public string Nombre
         {
             get
             {
                 return sNombre;
+            }
+            set
+            {
+                sNombre = value;
             }
         }
 
@@ -53,6 +71,10 @@ namespace Archivos
             get
             {
                 return dirAtributo;
+            }
+            set
+            {
+                dirAtributo = value;
             }
         }
 

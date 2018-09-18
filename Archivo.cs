@@ -11,23 +11,27 @@ namespace Archivos
         private string sNombre;
         private SortedDictionary<Entidad, List<Atributo>> DD;
         private long lCabecera;
+        private string sRuta;
+        private string sDirectorio;
 
         //Constructor
-        public Archivo(string n)
+        public Archivo(string n, string ruta, string direc)
         {
             sNombre = n;
             DD = new SortedDictionary<Entidad, List<Atributo>>(new ComparaEntidades());
             lCabecera = -1;
+            sRuta = ruta;
+            direc = sDirectorio;
         }
 
         //Guarda los cambios realizados en el archivo
         public void Save()
         {
-            //Auciliar para convertir de SortedDictionary a Dictionary
+            //Auxiliar para convertir de SortedDictionary a Dictionary
             Dictionary<Entidad, List<Atributo>> tempDD = DD.ToDictionary(x => x.Key, x => x.Value);
             //Formato de Serializacion/Deserializacion
             var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            var fi = new System.IO.FileInfo(@sNombre + ".dd");
+            var fi = new System.IO.FileInfo(@sRuta);
             //Crea el archivo
             using (var binaryFile = fi.Create())
             {
@@ -44,7 +48,7 @@ namespace Archivos
             Dictionary<Entidad, List<Atributo>> readBack;
             //Formato de Serializacion/Deserializacion
             var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            var fi = new System.IO.FileInfo(@"jhgfdsa.dd");
+            var fi = new System.IO.FileInfo(@sRuta);
             //Abre el archivo
             using (var binaryFile = fi.OpenRead())
             {
@@ -97,6 +101,14 @@ namespace Archivos
             get
             {
                 return DD;
+            }
+        }
+
+        public string Directorio
+        {
+            get
+            {
+                return sDirectorio;
             }
         }
 

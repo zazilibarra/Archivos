@@ -14,7 +14,7 @@ namespace Archivos
         private long dirAtributo;
         private char cTipo;
         private int iLong;
-        private int iTipoIndice;
+        public int iTipoIndice;
         private long dirIndice;
         private long dirSigAtributo;
 
@@ -48,6 +48,10 @@ namespace Archivos
             {
                 return sNombre;
             }
+            set
+            {
+                sNombre = value;
+            }
         }
 
         public char TipoDato
@@ -55,6 +59,10 @@ namespace Archivos
             get
             {
                 return cTipo;
+            }
+            set
+            {
+                cTipo = value;
             }
         }
 
@@ -64,6 +72,10 @@ namespace Archivos
             {
                 return dirIndice;
             }
+            set
+            {
+                dirIndice = value;
+            }
         }
 
         public int Longitud
@@ -71,6 +83,10 @@ namespace Archivos
             get
             {
                 return iLong;
+            }
+            set
+            {
+                iLong = value;
             }
         }
 
