@@ -205,6 +205,7 @@ namespace Archivos
                 Archivo.DiccDatos.Remove(borrar);
             }
             //Se actualiza el datagrid
+            calcularDirecciones();
             actualizarGridEntidad();
         }
 
@@ -261,16 +262,24 @@ namespace Archivos
                 }
             }
             //Se busca el atributo en la lista de atributos que contiene la entidad y se guarda para posteriormente eliminarlo
-            foreach (Atributo an in Archivo.DiccDatos[dueno])
+            if (dueno != null)
             {
-                if (an.Nombre == gridAtributos.SelectedCells[0].Value.ToString())
+                foreach (Atributo an in Archivo.DiccDatos[dueno])
                 {
-                    borrar = an;
+                    if (an.Nombre == gridAtributos.SelectedCells[0].Value.ToString())
+                    {
+                        borrar = an;
+                    }
                 }
+            }
+            else
+            {
+                MessageBox.Show("No se encontro la entidad");
             }
             //Se elimina el atributo
             Archivo.DiccDatos[dueno].Remove(borrar);
             //Se actualiza el datagrid
+            calcularDirecciones();
             actualizarGridAtributo(dueno);
         }
 
