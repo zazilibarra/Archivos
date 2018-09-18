@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.gridEntidad = new System.Windows.Forms.DataGridView();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Dir_Entidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,6 +49,9 @@
             this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cabeceraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtCabecera = new System.Windows.Forms.ToolStripTextBox();
             this.txtEntidad = new System.Windows.Forms.TextBox();
             this.btnCrearEntidad = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -57,9 +61,6 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cabeceraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtCabecera = new System.Windows.Forms.ToolStripTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridEntidad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridAtributos)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -135,7 +136,6 @@
             this.gridAtributos.RowTemplate.Height = 24;
             this.gridAtributos.Size = new System.Drawing.Size(743, 527);
             this.gridAtributos.TabIndex = 1;
-            this.gridAtributos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
             // 
             // Nombre_Attr
             // 
@@ -205,7 +205,7 @@
             // nuevoToolStripMenuItem
             // 
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.nuevoToolStripMenuItem.Text = "Nuevo";
             this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.nuevoToolStripMenuItem_Click);
             // 
@@ -226,8 +226,30 @@
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
             this.salirToolStripMenuItem.Text = "Salir";
+            // 
+            // verToolStripMenuItem
+            // 
+            this.verToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cabeceraToolStripMenuItem});
+            this.verToolStripMenuItem.Name = "verToolStripMenuItem";
+            this.verToolStripMenuItem.Size = new System.Drawing.Size(42, 24);
+            this.verToolStripMenuItem.Text = "Ver";
+            // 
+            // cabeceraToolStripMenuItem
+            // 
+            this.cabeceraToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.txtCabecera});
+            this.cabeceraToolStripMenuItem.Name = "cabeceraToolStripMenuItem";
+            this.cabeceraToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.cabeceraToolStripMenuItem.Text = "Cabecera";
+            // 
+            // txtCabecera
+            // 
+            this.txtCabecera.Name = "txtCabecera";
+            this.txtCabecera.ReadOnly = true;
+            this.txtCabecera.Size = new System.Drawing.Size(100, 27);
             // 
             // txtEntidad
             // 
@@ -317,28 +339,6 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // verToolStripMenuItem
-            // 
-            this.verToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cabeceraToolStripMenuItem});
-            this.verToolStripMenuItem.Name = "verToolStripMenuItem";
-            this.verToolStripMenuItem.Size = new System.Drawing.Size(42, 24);
-            this.verToolStripMenuItem.Text = "Ver";
-            // 
-            // cabeceraToolStripMenuItem
-            // 
-            this.cabeceraToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.txtCabecera});
-            this.cabeceraToolStripMenuItem.Name = "cabeceraToolStripMenuItem";
-            this.cabeceraToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.cabeceraToolStripMenuItem.Text = "Cabecera";
-            // 
-            // txtCabecera
-            // 
-            this.txtCabecera.Name = "txtCabecera";
-            this.txtCabecera.ReadOnly = true;
-            this.txtCabecera.Size = new System.Drawing.Size(100, 27);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -349,8 +349,11 @@
             this.Controls.Add(this.gridAtributos);
             this.Controls.Add(this.gridEntidad);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "Main";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Archivos";
             ((System.ComponentModel.ISupportInitialize)(this.gridEntidad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridAtributos)).EndInit();

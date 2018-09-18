@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Archivos
 {
+    //Atributo Serializable para guardar y abrir archivos
     [Serializable]
     public class Atributo
     {
@@ -17,6 +18,7 @@ namespace Archivos
         private long dirIndice;
         private long dirSigAtributo;
 
+        //Constructor
         public Atributo(string n, char t, int l, int ti, long da)
         {
             sNombre = n;
@@ -28,6 +30,7 @@ namespace Archivos
             dirSigAtributo = -1;
         }
 
+        //Editar Atributo. Solo se puede modificar Nombre, tipo, long y tipo de indice siempre y cuando no existan registros de datos
         public bool Modificar(string n, char t, int l, int ti)
         {
             sNombre = n;
@@ -38,6 +41,7 @@ namespace Archivos
             return true;
         }
 
+        #region METODOS DE ACCESO
         public string Nombre
         {
             get
@@ -101,7 +105,6 @@ namespace Archivos
                 return dirSigAtributo;
             }
         }
-
-
+        #endregion
     }
 }

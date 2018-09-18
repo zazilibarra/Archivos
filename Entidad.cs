@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Archivos
 {
+    //Atributo Serializable para guardar y abrir archivos
     [Serializable]
     public class Entidad
     {
@@ -15,6 +16,7 @@ namespace Archivos
         private long dirRegDat;
         private long dirSigEnt;
 
+        //Constructor
         public Entidad(string n, long de)
         {
             sNombre = n;
@@ -24,6 +26,7 @@ namespace Archivos
             dirSigEnt = -1;
         }
 
+        #region METODOS DE ACCESO
         public void Modificar(string n)
         {
             this.sNombre = n;
@@ -72,5 +75,6 @@ namespace Archivos
                 return dirSigEnt;
             }
         }
+        #endregion
     }
 }
