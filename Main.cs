@@ -303,14 +303,12 @@ namespace Archivos
                 {
                     ent.DireccionAtr = Archivo.DiccDatos[ent][0].Direccion;
                     Archivo.modificarEntidad(ent);
-                    //Archivo.GuardarCambios(ent);
                 }
                 //Se guarda la direccion de la entidad siguiente en el directorio
                 if (anterior != null)
                 {
                     anterior.DirSigEntidad = ent.Direccion;
                     Archivo.modificarEntidad(anterior);
-                    //Archivo.GuardarCambios(anterior);
                 }
                 anterior = ent;
                 foreach (Atributo an in Archivo.DiccDatos[ent])
@@ -319,6 +317,7 @@ namespace Archivos
                     if(antes!=null)
                     {
                         antes.DirSigAtributo = an.Direccion;
+                        Archivo.modificarAtributo(antes);
                     }
                     antes = an;
                 }

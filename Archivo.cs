@@ -66,7 +66,6 @@ namespace Archivos
             {
                 byte[] cabBytes = new byte[8];
                 byte[] entBytes = new byte[62];
-                byte[] atrBytes = new byte[63];
                 long cab;
                 long currentDir;
                 reader.Read(cabBytes, 0, 8);
@@ -77,27 +76,53 @@ namespace Archivos
                     reader.BaseStream.Seek(currentDir, SeekOrigin.Begin);
                     byte[] entBytesNobre = new byte[29];
                     reader.Read(entBytesNobre, 0, 29);
-                    //string nombre = BitConverter.ToString(entBytes);
                     string nombre = BinaryToString(entBytesNobre);
-
-                    reader.BaseStream.Seek(currentDir + 30, SeekOrigin.Begin);
+                    
                     byte[] entBytesDirRec = new byte[8];
                     reader.Read(entBytesDirRec, 0, 8);
                     long direc = BitConverter.ToInt64(entBytesDirRec, 0);
-
-                    reader.BaseStream.Seek(currentDir + 38, SeekOrigin.Begin);
+                    
                     reader.Read(entBytes, 0, 8);
                     long dirAtr = BitConverter.ToInt64(entBytes, 0);
-
-                    reader.BaseStream.Seek(currentDir + 46, SeekOrigin.Begin);
+                    
                     reader.Read(entBytes, 0, 8);
                     long dirRegDat = BitConverter.ToInt64(entBytes, 0);
 
-                    reader.BaseStream.Seek(currentDir + 54, SeekOrigin.Begin);
                     reader.Read(entBytes, 0, 8);
                     long dirSigEnt = BitConverter.ToInt64(entBytes, 0);
                     currentDir = dirSigEnt;
+
+
                 }
+            }
+        }
+
+        public long LeerAtributo(long dir)
+        {
+            using (BinaryReader reader = new BinaryReader(new FileStream(sRuta, FileMode.Open)))
+            {
+                byte[] atrBytes = new byte[63];
+                reader.BaseStream.Seek(dir, SeekOrigin.Begin);
+
+                byte[] entBytesNobre = new byte[29];
+                reader.Read(entBytesNobre, 0, 29);
+                string nombre = BinaryToString(entBytesNobre);
+
+                byte[] entBytesDirRec = new byte[8];
+                reader.Read(entBytesDirRec, 0, 8);
+                long direc = BitConverter.ToInt64(entBytesDirRec, 0);
+
+                reader.Read(atrBytes, 0, 8);
+                long dirAtr = BitConverter.ToInt64(atrBytes, 0);
+
+                reader.Read(atrBytes, 0, 8);
+                long dirRegDat = BitConverter.ToInt64(atrBytes, 0);
+
+                reader.Read(atrBytes, 0, 8);
+                long dirSigEnt = BitConverter.ToInt64(atrBytes, 0);
+                dir = dirSigEnt;
+
+                return -1;
             }
         }
 
@@ -146,12 +171,12 @@ namespace Archivos
             {
                 stream.Position = ant.Direccion;
                 stream.Write(Encoding.ASCII.GetBytes(ant.Nombre.PadRight(29)), 0, 29);
-                stream.Write(BitConverter.GetBytes(ant.Direccion), 30, 8);
-                stream.Write(Encoding.ASCII.GetBytes(ant.TipoDato.ToString()), 38, 1);
-                stream.Write(BitConverter.GetBytes(ant.Longitud), 39, 4);
-                stream.Write(BitConverter.GetBytes(ant.TipoIndice), 43, 4);
-                stream.Write(BitConverter.GetBytes(ant.DirIndice), 47, 8);
-                stream.Write(BitConverter.GetBytes(ant.DirSigAtributo), 55, 8);
+                stream.Write(BitConverter.GetBytes(ant.Direccion), 0, 8);
+                stream.Write(Encoding.ASCII.GetBytes(ant.TipoDato.ToString()), 0, 1);
+                stream.Write(BitConverter.GetBytes(ant.Longitud), 0, 4);
+                stream.Write(BitConverter.GetBytes(ant.TipoIndice), 0, 4);
+                stream.Write(BitConverter.GetBytes(ant.DirIndice), 0, 8);
+                stream.Write(BitConverter.GetBytes(ant.DirSigAtributo), 0, 8);
             }
         }
 
