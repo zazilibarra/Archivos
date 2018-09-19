@@ -72,21 +72,22 @@ namespace Archivos
                 reader.Read(cabBytes, 0, 8);
                 cab = BitConverter.ToInt64(cabBytes, 0);
                 currentDir = cab;
-                while(currentDir!=-1)
+                while (currentDir != -1)
                 {
                     reader.BaseStream.Seek(currentDir, SeekOrigin.Begin);
                     reader.Read(entBytes, 0, 30);
-                    string nombre = BitConverter.ToString(entBytes);
+                    //string nombre = BitConverter.ToString(entBytes);
+                    string nombre = BinaryToString(entBytes);
 
-                    reader.BaseStream.Seek(currentDir+30, SeekOrigin.Begin);
+                    reader.BaseStream.Seek(currentDir + 30, SeekOrigin.Begin);
                     reader.Read(entBytes, 0, 8);
-                    long direc = BitConverter.ToInt64(entBytes,0);
+                    long direc = BitConverter.ToInt64(entBytes, 0);
 
-                    reader.BaseStream.Seek(currentDir+38, SeekOrigin.Begin);
+                    reader.BaseStream.Seek(currentDir + 38, SeekOrigin.Begin);
                     reader.Read(entBytes, 0, 8);
                     long dirAtr = BitConverter.ToInt64(entBytes, 0);
 
-                    reader.BaseStream.Seek(currentDir+46, SeekOrigin.Begin);
+                    reader.BaseStream.Seek(currentDir + 46, SeekOrigin.Begin);
                     reader.Read(entBytes, 0, 8);
                     long dirRegDat = BitConverter.ToInt64(entBytes, 0);
 
@@ -107,9 +108,34 @@ namespace Archivos
             }
         }
 
-        public void modificarEntidad()
+        public void modificarEntidad(Entidad ent)
         {
+            using (Stream stream = File.Open(sRuta, FileMode.Open))
+            {
+                stream.Position = ent.Direccion;
+                byte[] s = StringToBinary(ent.Nombre.PadRight(29));
+                stream.Write(s, 0, 29);
+                stream.Write(BitConverter.GetBytes(ent.Direccion), 0, 8);
+                stream.Write(BitConverter.GetBytes(ent.DireccionAtr), 0, 8);
+                stream.Write(BitConverter.GetBytes(ent.DireccionDatos), 0, 8);
+                stream.Write(BitConverter.GetBytes(ent.DirSigEntidad), 0, 8);
+            }
+        }
 
+        public string BinaryToString(byte[] entBytes)
+        {
+            return Encoding.ASCII.GetString(entBytes);
+        }
+
+        public byte[] StringToBinary(string texto)
+        {
+            byte[] lb = new byte[30];
+
+            for (int i = 0; i < 29; i++)
+            {
+                lb[i] = Convert.ToByte(texto[i]);
+            }
+            return lb;
         }
 
         //Llena el DD con sus respectivas entidades y atributos cuando se abre un archivo
