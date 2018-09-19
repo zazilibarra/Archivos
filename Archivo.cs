@@ -112,6 +112,21 @@ namespace Archivos
 
         }
 
+        public void modificarAtributo(Atributo ant)
+        {
+            using (Stream stream = File.Open(sRuta, FileMode.Open))
+            {
+                stream.Position = ant.Direccion;
+                stream.Write(Encoding.ASCII.GetBytes(ant.Nombre.PadRight(29)), 0, 29);
+                stream.Write(BitConverter.GetBytes(ant.Direccion), 30, 8);
+                stream.Write(Encoding.ASCII.GetBytes(ant.TipoDato.ToString()), 38, 1);
+                stream.Write(BitConverter.GetBytes(ant.Longitud), 39, 4);
+                stream.Write(BitConverter.GetBytes(ant.TipoIndice), 43, 4);
+                stream.Write(BitConverter.GetBytes(ant.DirIndice), 47, 8);
+                stream.Write(BitConverter.GetBytes(ant.DirSigAtributo), 55, 8);
+            }
+        }
+
         //Llena el DD con sus respectivas entidades y atributos cuando se abre un archivo
         public void LlenarDiccionario(Dictionary<Entidad, List<Atributo>> r)
         {
