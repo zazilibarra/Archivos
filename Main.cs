@@ -66,9 +66,9 @@ namespace Archivos
                     txtCabecera.Text = Archivo.Cabecera.ToString();
                     Archivo.modificarCabecera();
                     //Se actualiza la Grid de Entidades
-                    calcularDirecciones();
                     ent.GuardarEnt(Archivo.Directorio);
                     Archivo.GuardarCambios(ent);
+                    calcularDirecciones();
                     actualizarGridEntidad();
                 }
             }
@@ -187,6 +187,7 @@ namespace Archivos
                 if (ent.Nombre == gridEntidad.SelectedCells[0].Value.ToString())
                 {
                     ent.Nombre = txtEntidad.Text;
+                    Archivo.modificarEntidad(ent);
                 }
             }
             //Se actualiza el grid
@@ -301,13 +302,15 @@ namespace Archivos
                 if (Archivo.DiccDatos[ent].Count != 0)
                 {
                     ent.DireccionAtr = Archivo.DiccDatos[ent][0].Direccion;
-                    Archivo.GuardarCambios(ent);
+                    Archivo.modificarEntidad(ent);
+                    //Archivo.GuardarCambios(ent);
                 }
                 //Se guarda la direccion de la entidad siguiente en el directorio
                 if (anterior != null)
                 {
                     anterior.DirSigEntidad = ent.Direccion;
-                    Archivo.GuardarCambios(anterior);
+                    Archivo.modificarEntidad(anterior);
+                    //Archivo.GuardarCambios(anterior);
                 }
                 anterior = ent;
                 foreach (Atributo an in Archivo.DiccDatos[ent])
