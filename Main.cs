@@ -66,9 +66,9 @@ namespace Archivos
                     txtCabecera.Text = Archivo.Cabecera.ToString();
                     Archivo.modificarCabecera();
                     //Se actualiza la Grid de Entidades
-                    calcularDirecciones();
                     ent.GuardarEnt(Archivo.Directorio);
                     Archivo.GuardarCambios(ent);
+                    calcularDirecciones();
                     actualizarGridEntidad();
                 }
             }

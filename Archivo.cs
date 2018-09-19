@@ -75,9 +75,10 @@ namespace Archivos
                 while (currentDir != -1)
                 {
                     reader.BaseStream.Seek(currentDir, SeekOrigin.Begin);
-                    reader.Read(entBytes, 0, 30);
+                    byte[] entBytesNobre = new byte[30];
+                    reader.Read(entBytesNobre, 0, 30);
                     //string nombre = BitConverter.ToString(entBytes);
-                    string nombre = BinaryToString(entBytes);
+                    string nombre = BinaryToString(entBytesNobre);
 
                     reader.BaseStream.Seek(currentDir + 30, SeekOrigin.Begin);
                     reader.Read(entBytes, 0, 8);
