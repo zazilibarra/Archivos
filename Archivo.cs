@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,45 +25,97 @@ namespace Archivos
             direc = sDirectorio;
         }
 
-        //Guarda los cambios realizados en el archivo
-        public void Save()
+        public void GuardarCambios(Object elemento)
         {
-            //Auxiliar para convertir de SortedDictionary a Dictionary
-            Dictionary<Entidad, List<Atributo>> tempDD = DD.ToDictionary(x => x.Key, x => x.Value);
-            //Formato de Serializacion/Deserializacion
-            var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            var fi = new System.IO.FileInfo(@sRuta);
-            //Crea el archivo
-            using (var binaryFile = fi.Create())
+            using (var stream = new FileStream(sRuta, FileMode.Append, FileAccess.Write, FileShare.None))
+            using (var writer = new BinaryWriter(stream))
+                if (elemento is long)
+                {
+                    {
+                        writer.Write((long)elemento);
+                    }
+                }
+                else
+                {
+                    if (elemento is Entidad)
+                    {
+                        Entidad ent = (Entidad)elemento;
+                        writer.Write(ent.Nombre.PadRight(29));
+                        writer.Write(ent.Direccion);
+                        writer.Write(ent.DireccionAtr);
+                        writer.Write(ent.DireccionDatos);
+                        writer.Write(ent.DirSigEntidad);
+                    }
+                    else
+                    {
+                        Atributo an = (Atributo)elemento;
+                        writer.Write(an.Nombre.PadRight(29));
+                        writer.Write(an.Direccion);
+                        writer.Write(an.TipoDato);
+                        writer.Write(an.Longitud);
+                        writer.Write(an.TipoIndice);
+                        writer.Write(an.DirIndice);
+                        writer.Write(an.DirSigAtributo);
+                    }
+                }
+        }
+
+        public void LeerArchivo()
+        {
+            using (BinaryReader reader = new BinaryReader(new FileStream(sRuta, FileMode.Open)))
             {
-                //Serializa el diccionario con el formato binario
-                binaryFormatter.Serialize(binaryFile, tempDD);
-                binaryFile.Flush();
+                byte[] cabBytes = new byte[8];
+                byte[] entBytes = new byte[62];
+                byte[] atrBytes = new byte[63];
+                long cab;
+                long currentDir;
+                reader.Read(cabBytes, 0, 8);
+                cab = BitConverter.ToInt64(cabBytes, 0);
+                currentDir = cab;
+                while(currentDir!=-1)
+                {
+                    reader.BaseStream.Seek(currentDir, SeekOrigin.Begin);
+                    reader.Read(entBytes, 0, 30);
+                    string nombre = BitConverter.ToString(entBytes);
+
+                    reader.BaseStream.Seek(currentDir+30, SeekOrigin.Begin);
+                    reader.Read(entBytes, 0, 8);
+                    long direc = BitConverter.ToInt64(entBytes,0);
+
+                    reader.BaseStream.Seek(currentDir+38, SeekOrigin.Begin);
+                    reader.Read(entBytes, 0, 8);
+                    long dirAtr = BitConverter.ToInt64(entBytes, 0);
+
+                    reader.BaseStream.Seek(currentDir+46, SeekOrigin.Begin);
+                    reader.Read(entBytes, 0, 8);
+                    long dirRegDat = BitConverter.ToInt64(entBytes, 0);
+
+                    reader.BaseStream.Seek(currentDir + 54, SeekOrigin.Begin);
+                    reader.Read(entBytes, 0, 8);
+                    long dirSigEnt = BitConverter.ToInt64(entBytes, 0);
+                    currentDir = dirSigEnt;
+                }
             }
         }
 
-        //Abre el archivo deseado
-        public void Load()
+        public void modificarCabecera()
         {
-            //Auxiliar
-            Dictionary<Entidad, List<Atributo>> readBack;
-            //Formato de Serializacion/Deserializacion
-            var binaryFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            var fi = new System.IO.FileInfo(@sRuta);
-            //Abre el archivo
-            using (var binaryFile = fi.OpenRead())
+            using (Stream stream = File.Open(sRuta, FileMode.Open))
             {
-                //Deserializa el archivo binario y la informacion llega a un Diccionario auxiliar
-                readBack = (Dictionary<Entidad, List<Atributo>>)binaryFormatter.Deserialize(binaryFile);
+                stream.Position = 0;
+                stream.Write(BitConverter.GetBytes(this.Cabecera), 0, 8);
             }
-            //Llenba el DD para estarse trabajando en el programa
-            LlenarDiccionario(readBack);
+        }
+
+        public void modificarEntidad()
+        {
+
         }
 
         //Llena el DD con sus respectivas entidades y atributos cuando se abre un archivo
         public void LlenarDiccionario(Dictionary<Entidad, List<Atributo>> r)
         {
-            foreach(Entidad ent in r.Keys)
+            foreach (Entidad ent in r.Keys)
             {
                 //Por cada entidad añade una llave con su respectiva valor (Atributos)
                 DD.Add(ent, r[ent]);

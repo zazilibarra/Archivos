@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace Archivos
 {
     //Atributo Serializable para guardar y abrir archivos
-    [Serializable]
     public class Atributo
     {
         private string sNombre;
@@ -90,7 +89,7 @@ namespace Archivos
             }
         }
 
-        public long TipoIndice
+        public int TipoIndice
         {
             get
             {

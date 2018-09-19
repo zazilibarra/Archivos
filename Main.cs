@@ -41,6 +41,9 @@ namespace Archivos
                     Archivo = new Archivo(Path.GetFileNameWithoutExtension(saveFileDialog.FileName), Path.GetFullPath(saveFileDialog.FileName), Path.GetDirectoryName(saveFileDialog.FileName));
                     myStream.Close();
                 }
+                Archivo.Cabecera = -1;
+                txtCabecera.Text = Archivo.Cabecera.ToString();
+                Archivo.GuardarCambios(Archivo.Cabecera);
             }
         }
 
@@ -61,9 +64,11 @@ namespace Archivos
                     //Se actualiza la cabecera del archivo
                     Archivo.Cabecera = Archivo.DiccDatos.Keys.First<Entidad>().Direccion;
                     txtCabecera.Text = Archivo.Cabecera.ToString();
+                    Archivo.modificarCabecera();
                     //Se actualiza la Grid de Entidades
                     calcularDirecciones();
                     ent.GuardarEnt(Archivo.Directorio);
+                    Archivo.GuardarCambios(ent);
                     actualizarGridEntidad();
                 }
             }
@@ -125,6 +130,7 @@ namespace Archivos
                     calcularDirecciones();
                     actualizarGridAtributo(ent);
                     actualizarGridEntidad();
+                    Archivo.GuardarCambios(a);
                     currentDir += 63;
                 }
             }
@@ -145,7 +151,7 @@ namespace Archivos
         //Guardar Archivo
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Archivo.Save();
+           // Archivo.Save();
         }
 
         //Abrir Archivo
@@ -168,7 +174,7 @@ namespace Archivos
                     myStream.Close();
                 }
             }
-            Archivo.Load();
+            Archivo.LeerArchivo();
             actualizarGridEntidad();
         }
 
@@ -293,11 +299,15 @@ namespace Archivos
             {
                 //Si la entidad tiene atributos se busca el primero y se guarda la direccion
                 if (Archivo.DiccDatos[ent].Count != 0)
+                {
                     ent.DireccionAtr = Archivo.DiccDatos[ent][0].Direccion;
+                    Archivo.GuardarCambios(ent);
+                }
                 //Se guarda la direccion de la entidad siguiente en el directorio
                 if (anterior != null)
                 {
                     anterior.DirSigEntidad = ent.Direccion;
+                    Archivo.GuardarCambios(anterior);
                 }
                 anterior = ent;
                 foreach (Atributo an in Archivo.DiccDatos[ent])

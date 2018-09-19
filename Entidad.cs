@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace Archivos
 {
     //Atributo Serializable para guardar y abrir archivos
-    [Serializable]
     public class Entidad
     {
         private string sNombre;
