@@ -75,14 +75,15 @@ namespace Archivos
                 while (currentDir != -1)
                 {
                     reader.BaseStream.Seek(currentDir, SeekOrigin.Begin);
-                    byte[] entBytesNobre = new byte[30];
-                    reader.Read(entBytesNobre, 0, 30);
+                    byte[] entBytesNobre = new byte[29];
+                    reader.Read(entBytesNobre, 0, 29);
                     //string nombre = BitConverter.ToString(entBytes);
                     string nombre = BinaryToString(entBytesNobre);
 
                     reader.BaseStream.Seek(currentDir + 30, SeekOrigin.Begin);
-                    reader.Read(entBytes, 0, 8);
-                    long direc = BitConverter.ToInt64(entBytes, 0);
+                    byte[] entBytesDirRec = new byte[8];
+                    reader.Read(entBytesDirRec, 0, 8);
+                    long direc = BitConverter.ToInt64(entBytesDirRec, 0);
 
                     reader.BaseStream.Seek(currentDir + 38, SeekOrigin.Begin);
                     reader.Read(entBytes, 0, 8);
@@ -130,7 +131,7 @@ namespace Archivos
 
         public byte[] StringToBinary(string texto)
         {
-            byte[] lb = new byte[30];
+            byte[] lb = new byte[29];
 
             for (int i = 0; i < 29; i++)
             {
