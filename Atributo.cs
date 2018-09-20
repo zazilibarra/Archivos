@@ -29,6 +29,17 @@ namespace Archivos
             dirSigAtributo = -1;
         }
 
+        public Atributo(string n, long dirAtr, char tipoAtr, int longatr, int tipoIart, long dirInd, long dirSigAtrib)
+        {
+            sNombre = n;
+            dirAtributo = dirAtr;
+            cTipo = tipoAtr;
+            iLong = longatr;
+            iTipoIndice = tipoIart;
+            dirIndice = dirInd;
+            dirSigAtributo = dirSigAtrib;
+        }
+
         //Editar Atributo. Solo se puede modificar Nombre, tipo, long y tipo de indice siempre y cuando no existan registros de datos
         public bool Modificar(string n, char t, int l, int ti)
         {

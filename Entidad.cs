@@ -25,6 +25,15 @@ namespace Archivos
             dirSigEnt = -1;
         }
 
+        public Entidad(string n, long de,long dirAtr,long dirDatos,long sigEnt)
+        {
+            sNombre = n;
+            dirEntidad = de;
+            dirAtributo = dirAtr;
+            dirRegDat = dirDatos;
+            dirSigEnt = sigEnt;
+        }
+
         #region METODOS DE ACCESO
         public void Modificar(string n)
         {

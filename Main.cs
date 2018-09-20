@@ -127,10 +127,10 @@ namespace Archivos
                     //Añade al atributo a la entidad correspondiente
                     Archivo.DiccDatos[ent].Add(a);
                     //Actualiza la Grid de Atributos
+                    Archivo.GuardarCambios(a);
                     calcularDirecciones();
                     actualizarGridAtributo(ent);
                     actualizarGridEntidad();
-                    Archivo.GuardarCambios(a);
                     currentDir += 63;
                 }
             }
@@ -187,7 +187,7 @@ namespace Archivos
                 if (ent.Nombre == gridEntidad.SelectedCells[0].Value.ToString())
                 {
                     ent.Nombre = txtEntidad.Text;
-                    Archivo.modificarEntidad(ent);
+                    calcularDirecciones();
                 }
             }
             //Se actualiza el grid
@@ -247,6 +247,7 @@ namespace Archivos
                         {
                             an.Nombre = na.atributo.Nombre;
                             an.iTipoIndice = na.atributo.iTipoIndice;
+                            Archivo.modificarAtributo(an);
                         }
                     }
                     //Se actualiza el datagrid
@@ -298,6 +299,7 @@ namespace Archivos
             //Se busca cada entidad para aplicar los cambios
             foreach (Entidad ent in Archivo.DiccDatos.Keys)
             {
+                antes = null;
                 //Si la entidad tiene atributos se busca el primero y se guarda la direccion
                 if (Archivo.DiccDatos[ent].Count != 0)
                 {
