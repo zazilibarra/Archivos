@@ -42,8 +42,10 @@ namespace Archivos
                     myStream.Close();
                 }
                 Archivo.Cabecera = -1;
+                currentDir = 8;
                 txtCabecera.Text = Archivo.Cabecera.ToString();
                 Archivo.GuardarCambios(Archivo.Cabecera);
+                actualizarGridEntidad();
             }
         }
 
@@ -62,11 +64,9 @@ namespace Archivos
                     //Se recorre el apuntador de la direecion actual
                     currentDir += 62;
                     //Se actualiza la cabecera del archivo
-                    Archivo.Cabecera = Archivo.DiccDatos.Keys.First<Entidad>().Direccion;
-                    txtCabecera.Text = Archivo.Cabecera.ToString();
-                    Archivo.modificarCabecera();
+                    actCab();
                     //Se actualiza la Grid de Entidades
-                    ent.GuardarEnt(Archivo.Directorio);
+                    //ent.GuardarEnt(Archivo.Directorio);
                     Archivo.GuardarCambios(ent);
                     calcularDirecciones();
                     actualizarGridEntidad();
@@ -77,6 +77,13 @@ namespace Archivos
             {
                 MessageBox.Show("Ya existe una entidad con el mismo nombre");
             }
+        }
+
+        private void actCab()
+        {
+            Archivo.Cabecera = Archivo.DiccDatos.Keys.First<Entidad>().Direccion;
+            txtCabecera.Text = Archivo.Cabecera.ToString();
+            Archivo.modificarCabecera();
         }
 
         //Actualiza Grid de Entidades
@@ -114,7 +121,7 @@ namespace Archivos
             else
             {
                 //Crea una instancia de la ventana para capturar las propiedades del nuevo atributo
-                Nuevo_Atributo na = new Nuevo_Atributo(Archivo,false);
+                Nuevo_Atributo na = new Nuevo_Atributo(Archivo, false);
                 var Resultado = na.ShowDialog();
                 //Cuando la ventana se cierra
                 if (Resultado == DialogResult.OK)
@@ -151,7 +158,7 @@ namespace Archivos
         //Guardar Archivo
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           // Archivo.Save();
+            // Archivo.Save();
         }
 
         //Abrir Archivo
@@ -164,34 +171,61 @@ namespace Archivos
             openFileDialog.Filter = "Archivo de diccionario de datos (*.dd)|*.dd";
             openFileDialog.FilterIndex = 2;
             openFileDialog.RestoreDirectory = true;
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                if ((myStream = openFileDialog.OpenFile()) != null)
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    //Crea una instancia de Archivo con el nombre que se ingresó
-                    Archivo = new Archivo(Path.GetFileNameWithoutExtension(openFileDialog.FileName), Path.GetFullPath(openFileDialog.FileName), Path.GetDirectoryName(openFileDialog.FileName));
-                    myStream.Close();
+                    if ((myStream = openFileDialog.OpenFile()) != null)
+                    {
+                        //Crea una instancia de Archivo con el nombre que se ingresó
+                        Archivo = new Archivo(Path.GetFileNameWithoutExtension(openFileDialog.FileName), Path.GetFullPath(openFileDialog.FileName), Path.GetDirectoryName(openFileDialog.FileName));
+                        myStream.Close();
+                    }
                 }
+                Archivo.LeerArchivo();
+                txtCabecera.Text = Archivo.Cabecera.ToString();
+                txtEntidad.Text = "";
+                currentDir = Archivo.actualSize;
+                actualizarGridEntidad();
             }
-            Archivo.LeerArchivo();
-            actualizarGridEntidad();
+            catch (NullReferenceException ecx)
+            {
+
+            }
         }
 
         //Boton para la modificacion del nombre de la entidad
         private void button2_Click(object sender, EventArgs e)
         {
-            //Se busca la entidad contenida en el datagrid para modificar el valor del nombre
+            bool existe = false;
             foreach (Entidad ent in Archivo.DiccDatos.Keys)
             {
-                if (ent.Nombre == gridEntidad.SelectedCells[0].Value.ToString())
+                if (ent.Nombre == txtEntidad.Text)
                 {
-                    ent.Nombre = txtEntidad.Text;
-                    calcularDirecciones();
+                    existe = true;
                 }
             }
-            //Se actualiza el grid
-            actualizarGridEntidad();
+            if (!existe)
+            {
+                Entidad ent = Archivo.BuscarEntidad(gridEntidad.SelectedCells[0].Value.ToString());
+                Entidad aux = new Entidad(txtEntidad.Text, ent.Direccion, ent.DireccionAtr, ent.DireccionDatos, -1);
+                Archivo.DiccDatos.Remove(ent);
+                long dirAux = ent.DireccionAtr;
+                List<Atributo> agregar = new List<Atributo>();
+                while (dirAux >= 0)
+                {
+                    Atributo auxiliar = Archivo.LeerAtributo(dirAux);
+                    agregar.Add(auxiliar);
+                    dirAux = auxiliar.DirSigAtributo;
+                }
+                Archivo.DiccDatos.Add(aux, agregar);
+                calcularDirecciones();
+                actualizarGridEntidad();
+            }
+            else
+            {
+                MessageBox.Show("Ya existe una entidad con ese nombre");
+            }
         }
 
         //Metodo para eliminar la entidad seleccionada en el datagrid
@@ -213,12 +247,13 @@ namespace Archivos
             }
             //Se actualiza el datagrid
             calcularDirecciones();
+            actCab();
             actualizarGridEntidad();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Entidad dueno=null;
+            Entidad dueno = null;
             //Verifica que existan entidades
             if (Archivo.DiccDatos == null)
             {
@@ -227,7 +262,7 @@ namespace Archivos
             else
             {
                 //Crea una instancia de la ventana para modificar las propiedades del atributo
-                Nuevo_Atributo na = new Nuevo_Atributo(Archivo,true);
+                Nuevo_Atributo na = new Nuevo_Atributo(Archivo, true);
                 var Resultado = na.ShowDialog();
                 //Cuando la ventana se cierra
                 if (Resultado == DialogResult.OK)
@@ -316,7 +351,7 @@ namespace Archivos
                 foreach (Atributo an in Archivo.DiccDatos[ent])
                 {
                     //Se guarda la direccion del siguiente atributo de la entidad
-                    if(antes!=null)
+                    if (antes != null)
                     {
                         antes.DirSigAtributo = an.Direccion;
                         Archivo.modificarAtributo(antes);
@@ -324,6 +359,14 @@ namespace Archivos
                     antes = an;
                 }
             }
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gridAtributos.Rows.Clear();
+            gridEntidad.Rows.Clear();
+            txtEntidad.Text = "";
+            txtCabecera.Text = "No existe archivo";
         }
     }
 }

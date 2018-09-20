@@ -80,7 +80,7 @@
             this.Dir_Datos,
             this.Dir_Sig_Entidad});
             this.gridEntidad.Location = new System.Drawing.Point(9, 103);
-            this.gridEntidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridEntidad.Margin = new System.Windows.Forms.Padding(2);
             this.gridEntidad.Name = "gridEntidad";
             this.gridEntidad.ReadOnly = true;
             this.gridEntidad.RowTemplate.Height = 24;
@@ -132,7 +132,7 @@
             this.Dir_indice,
             this.Dir_Sig_Atr});
             this.gridAtributos.Location = new System.Drawing.Point(421, 103);
-            this.gridAtributos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gridAtributos.Margin = new System.Windows.Forms.Padding(2);
             this.gridAtributos.Name = "gridAtributos";
             this.gridAtributos.ReadOnly = true;
             this.gridAtributos.RowTemplate.Height = 24;
@@ -230,7 +230,8 @@
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
             this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.salirToolStripMenuItem.Text = "Salir";
+            this.salirToolStripMenuItem.Text = "Cerrar";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // verToolStripMenuItem
             // 
@@ -257,7 +258,7 @@
             // txtEntidad
             // 
             this.txtEntidad.Location = new System.Drawing.Point(4, 17);
-            this.txtEntidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtEntidad.Margin = new System.Windows.Forms.Padding(2);
             this.txtEntidad.Name = "txtEntidad";
             this.txtEntidad.Size = new System.Drawing.Size(217, 20);
             this.txtEntidad.TabIndex = 3;
@@ -265,7 +266,7 @@
             // btnCrearEntidad
             // 
             this.btnCrearEntidad.Location = new System.Drawing.Point(225, 17);
-            this.btnCrearEntidad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCrearEntidad.Margin = new System.Windows.Forms.Padding(2);
             this.btnCrearEntidad.Name = "btnCrearEntidad";
             this.btnCrearEntidad.Size = new System.Drawing.Size(56, 19);
             this.btnCrearEntidad.TabIndex = 4;
@@ -276,7 +277,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(286, 17);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(56, 19);
             this.button2.TabIndex = 5;
@@ -291,9 +292,9 @@
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.btnCrearEntidad);
             this.groupBox1.Location = new System.Drawing.Point(9, 40);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(407, 50);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
@@ -302,7 +303,7 @@
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(346, 17);
-            this.button5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(56, 19);
             this.button5.TabIndex = 6;
@@ -316,9 +317,9 @@
             this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Location = new System.Drawing.Point(421, 40);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(379, 50);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
@@ -327,7 +328,7 @@
             // button6
             // 
             this.button6.Location = new System.Drawing.Point(313, 17);
-            this.button6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button6.Margin = new System.Windows.Forms.Padding(2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(56, 19);
             this.button6.TabIndex = 7;
@@ -338,7 +339,7 @@
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(252, 17);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(56, 19);
             this.button3.TabIndex = 5;
@@ -349,7 +350,7 @@
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(191, 17);
-            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(56, 19);
             this.button4.TabIndex = 4;
@@ -369,7 +370,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

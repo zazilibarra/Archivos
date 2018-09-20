@@ -14,6 +14,7 @@ namespace Archivos
         private long lCabecera;
         private string sRuta;
         private string sDirectorio;
+        public long actualSize;
 
         //Constructor
         public Archivo(string n, string ruta, string direc)
@@ -46,6 +47,9 @@ namespace Archivos
                         writer.Write(ent.DireccionAtr);
                         writer.Write(ent.DireccionDatos);
                         writer.Write(ent.DirSigEntidad);
+                        writer.Close();
+                        stream.Close();
+                        modificarEntidad(ent);
                     }
                     else
                     {
@@ -57,6 +61,9 @@ namespace Archivos
                         writer.Write(an.TipoIndice);
                         writer.Write(an.DirIndice);
                         writer.Write(an.DirSigAtributo);
+                        writer.Close();
+                        stream.Close();
+                        modificarAtributo(an);
                     }
                 }
                 writer.Close();
@@ -64,37 +71,49 @@ namespace Archivos
             }
         }
 
+        public void EliminarEntidad(Entidad enti)
+        {
+            DiccDatos.Remove(enti);
+        }
+
         public void LeerArchivo()
         {
             List<Entidad> entidades = new List<Entidad>();
+            actualSize = new System.IO.FileInfo(sRuta).Length;
             using (BinaryReader reader = new BinaryReader(new FileStream(sRuta, FileMode.Open)))
             {
                 byte[] cabBytes = new byte[8];
-                byte[] entBytes = new byte[62];
                 long cab;
                 long currentDir;
                 reader.Read(cabBytes, 0, 8);
                 cab = BitConverter.ToInt64(cabBytes, 0);
+                this.Cabecera = cab;
                 currentDir = cab;
                 while (currentDir >= 0)
                 {
+                    byte[] entBytes = new byte[62];
                     reader.BaseStream.Seek(currentDir, SeekOrigin.Begin);
+                    reader.Read(entBytes, 0, 62);
+
                     byte[] entBytesNobre = new byte[29];
-                    reader.Read(entBytesNobre, 0, 29);
+                    entBytesNobre = entBytes.Take(29).ToArray();
                     string nombre = BinaryToString(entBytesNobre);
 
                     byte[] entBytesDirRec = new byte[8];
-                    reader.Read(entBytesDirRec, 0, 8);
+                    entBytesDirRec= entBytes.Skip(29).Take(8).ToArray();
                     long direc = BitConverter.ToInt64(entBytesDirRec, 0);
 
-                    reader.Read(entBytes, 0, 8);
-                    long dirAtr = BitConverter.ToInt64(entBytes, 0);
+                    byte[] entBytesDirAtr = new byte[8];
+                    entBytesDirAtr = entBytes.Skip(37).Take(8).ToArray();
+                    long dirAtr = BitConverter.ToInt64(entBytesDirAtr, 0);
 
-                    reader.Read(entBytes, 0, 8);
-                    long dirRegDat = BitConverter.ToInt64(entBytes, 0);
+                    byte[] entBytesDirDat = new byte[8];
+                    entBytesDirDat = entBytes.Skip(45).Take(8).ToArray();
+                    long dirRegDat = BitConverter.ToInt64(entBytesDirDat, 0);
 
-                    reader.Read(entBytes, 0, 8);
-                    long dirSigEnt = BitConverter.ToInt64(entBytes, 0);
+                    byte[] entBytesDirSig = new byte[8];
+                    entBytesDirSig = entBytes.Skip(53).Take(8).ToArray();
+                    long dirSigEnt = BitConverter.ToInt64(entBytesDirSig, 0);
                     currentDir = dirSigEnt;
 
                     Entidad Ent = new Entidad(nombre, direc, dirAtr, dirRegDat, dirSigEnt);
